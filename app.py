@@ -209,7 +209,7 @@ def christmas_section():
         <h2 class="christmas-title">🎄 Christmas Surprise 🎁</h2>
         <p class="christmas-text">As we celebrate your special day, we would love for you to join us and share the joy of Christmas together</p>
         <h3 class="christmas-subtitle">📅 Event Details</h3>
-        <p class="event-details"><b>Date:</b> December 25th, 2025 at 7:00 PM</p>
+        <p class="event-details"><b>Date:</b> December 24th, 2025 at 6:00 PM</p>
         <p class="event-details"><b>Location:</b> Our Home — Guntur</p>
     </div>
     """, unsafe_allow_html=True)
