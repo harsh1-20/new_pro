@@ -207,7 +207,7 @@ def christmas_section():
     st.markdown("""
     <div class="christmas-card">
         <h2 class="christmas-title">🎄 Christmas Surprise 🎁</h2>
-        <p class="christmas-text">As we celebrate your birthday, we also invite you to join us for a warm and joyful Christmas gathering.</p>
+        <p class="christmas-text">As we celebrate your special day, we would love for you to join us and share the joy of Christmas together</p>
         <h3 class="christmas-subtitle">📅 Event Details</h3>
         <p class="event-details"><b>Date:</b> December 25th, 2025 at 7:00 PM</p>
         <p class="event-details"><b>Location:</b> Our Home — Guntur</p>
@@ -240,18 +240,32 @@ def arrival_section():
     st.subheader("✨one quick question✨")
     st.write("Can you please tell us quickly about your arrival? ❤️")
 
-    choice = st.radio("Your Response:", ["we'll be there! 🎉", "Unable to come 😔"])
+    # radio choice
+    choice = st.radio("Your Response:", ["we'll be there! 🎉", "Unable to come 😔"], index=0, key="arrival_choice")
 
-    if st.button("Send Confirmation ❤️"):
+    # button - handle click
+    if st.button("Send Confirmation ❤️", key="send_confirmation"):
         st.success("Thank you Babai! Redirecting to WhatsApp...")
 
-        # Redirect message
+        # build WhatsApp link using the selected choice (choice is defined here)
         wa_message = f"My arrival update: {choice}"
         wa_url = f"https://api.whatsapp.com/send?phone={urllib.parse.quote(WHATSAPP_NUMBER)}&text={urllib.parse.quote(wa_message)}"
 
-        time.sleep(1)
-        st.markdown(f"<meta http-equiv='refresh' content='0; url={wa_url}'>", unsafe_allow_html=True)
+        # open WhatsApp in a new tab using JS (works from inside Streamlit iframe in most browsers)
+        st.markdown(
+            f"""
+            <script>
+                window.open('{wa_url}', '_blank');
+            </script>
+            """,
+            unsafe_allow_html=True,
+        )
 
+        # fallback clickable link in case popups are blocked
+        st.markdown(
+            f"<p style='margin-top:10px'><a href='{wa_url}' target='_blank' style='font-size:18px; color:{primary_color};'>Click here if WhatsApp didn’t open automatically</a></p>",
+            unsafe_allow_html=True,
+        )
 
 # -------------------------
 # MAIN APP
